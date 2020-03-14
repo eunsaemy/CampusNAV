@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>CampusNAV - Login</title>
+  <meta name="campusNAV stuffs" content="my bcit project">
+  <meta name="author" content="campusNAV">
+
+  <!------------------------------------------------------------------------------>
+  <!-- Bootstrap for Mobile-first                                               -->
+  <!------------------------------------------------------------------------------>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+  <!------------------------------------------------------------------------------>
+  <!-- Add Firebase products that you want to use                               -->
+  <!------------------------------------------------------------------------------>
+  <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-firestore.js"></script>
+  <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+  <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+
+  <!------------------------------------------------------------------------------>
+  <!-- Optional styles and scripts of your own                                  -->
+  <!------------------------------------------------------------------------------>
+  <link rel="stylesheet" href="style.css">
+  <!-- <script src="script.js"></script> -->
+</head>
+
+<body>
+
+  <div>
+    <!-- Logo image -->
+    <img id='logo' src='logo2.png' />
+    <!-- Heading -->
+    <h1 class='bigger'>CampusNAV</h1>
+    <!-- App description -->
+    <h3>BCIT Burnaby Campus navigation at your fingertips</h3>
+    <!-- Login -->
+    <div id="firebaseui-auth-container"></div>
+    <!-- Loading message -->
+    <div id="loader">Loading...</div>
+  </div>
+
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+
+  <script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyCk0i8nhu1vqh0c9dUIUEGy_2jNq6i4Glw",
+      authDomain: "campus-nav-8edaf.firebaseapp.com",
+      databaseURL: "https://campus-nav-8edaf.firebaseio.com",
+      projectId: "campus-nav-8edaf",
+      storageBucket: "campus-nav-8edaf.appspot.com",
+      messagingSenderId: "926858289313",
+      appId: "1:926858289313:web:7171d305abb80d1a60d0e0"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+  </script>
+
+  <script>
+    // Initialize the FirebaseUI Widget using Firebase.
+    var ui = new firebaseui.auth.AuthUI(firebase.auth());
+
+    var uiConfig = {
+      callbacks: {
+        signInSuccessWithAuthResult: function (authResult, redirectUrl) {
+          // User successfully signed in.
+          // Return type determines whether we continue the redirect automatically
+          // or whether we leave that to developer to handle.
+          return verifySignIn();
+        },
+        uiShown: function () {
+          // The widget is rendered.
+          // Hide the loader.
+          document.getElementById('loader').style.display = 'none';
+        }
+      },
+      // Uses popup for IDP Providers sign-in flow instead of the default, redirect.
+      signInFlow: 'popup',
+      signInSuccessUrl: 'main.html',
+      signInOptions: [
+        // Leave the lines as is for the providers you want to offer your users.
+        // firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+        // firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+        // firebase.auth.TwitterAuthProvider.PROVIDER_ID,
+        // firebase.auth.GithubAuthProvider.PROVIDER_ID,
+        firebase.auth.EmailAuthProvider.PROVIDER_ID,
+        // firebase.auth.PhoneAuthProvider.PROVIDER_ID
+      ],
+      // Terms of service url.
+      tosUrl: 'main.html',
+      // Privacy policy url.
+      privacyPolicyUrl: 'main.html'
+    };
+    // The start method will wait until the DOM is loaded.
+    ui.start('#firebaseui-auth-container', uiConfig);
+
+    function verifySignIn() {
+      return true;
+    }
+  </script>
+</body>
+
+</html>

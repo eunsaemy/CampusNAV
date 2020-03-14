@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,700&display=swap');
+
+body {
+	background-color: #7dda8f;
+	font-family: 'Roboto', sans-serif;
+}
+
+#logo {
+	width: 90%;
+}
+
+body > div {
+	width: 100%;
+	text-align: center;
+}
+
+#firebaseui-auth-container {
+	min-width: 100%;
+	margin: 0;
+	font-size: 4em;
+}

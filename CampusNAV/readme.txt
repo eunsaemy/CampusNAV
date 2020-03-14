@@ -1,1 +1,1 @@
-COMP 1930 Project
+Deployed: https://campus-nav-8edaf.firebaseapp.com/
